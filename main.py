@@ -8,12 +8,9 @@ spotify = spotipy.Spotify(
     client_credentials_manager=SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID,
                                                         client_secret=SPOTIPY_CLIENT_SECRET))
 
-results = spotify.playlist_items(playlist_id=SPOTIFY_PLAYLIST_ID)
-
-
 tracks = {}
 for offset in range(0, 1301, 100):
-    results = spotify.playlist_items(playlist_id="2RWy0Ml1btnAF1unHJN0S8", offset=offset)
+    results = spotify.playlist_items(playlist_id=SPOTIFY_PLAYLIST_ID, offset=offset)
     for track in results["items"]:
         tracks[track["track"]["name"]] = {"duration_ms": track["track"]["duration_ms"],
                                           "artists": [artist["name"] for artist in track["track"]["artists"]]}
